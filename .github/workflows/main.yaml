@@ -1,0 +1,11 @@
+name: Deploy a Surge
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Surge
+        run: npm install -g surge
+      - name: Deploy
+        run: surge ./ --project ./ --domain aliandy-web-itla.surge.sh --login ${{ secrets.SURGE_LOGIN }} --token ${{ secrets.SURGE_TOKEN }}
