@@ -1,11 +1,26 @@
 name: Deploy a Surge
-on: [push]
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Install Surge
-        run: npm install -g surge
-      - name: Deploy
-        run: surge ./ --project ./ --domain aliandy-web-itla.surge.sh --login ${{ secrets.SURGE_LOGIN }} --token ${{ secrets.SURGE_TOKEN }}
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validar el sitio
+        run: test -f index.html
+
+      - name: Desplegar en Surge
+        if: env.SURGE_TOKEN != ''
+        run: npx --yes surge ./ aliandy-web-itla.surge.sh

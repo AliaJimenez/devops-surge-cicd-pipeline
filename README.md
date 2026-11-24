@@ -1,6 +1,12 @@
 # DevOps Automated Deployment with Surge & GitHub Actions 🚀
 
-Este proyecto fue desarrollado para la materia **Electiva II: DevOps**. El objetivo principal es diseñar e implementar un pipeline automatizado de **Integración Continua y Despliegue Continuo (CI/CD)** para eliminar los despliegues manuales, asegurando que cualquier cambio en el código fuente se publique en producción de forma segura e instantánea al realizar un *push* a la rama principal.
+[![Deploy a Surge](https://github.com/AliaJimenez/devops-surge-cicd-pipeline/actions/workflows/main.yaml/badge.svg)](https://github.com/AliaJimenez/devops-surge-cicd-pipeline/actions/workflows/main.yaml)
+
+**EN** — A continuous deployment pipeline: every push to `main` triggers GitHub Actions, which validates the static site and publishes it to **Surge.sh** using credentials stored as repository secrets — no manual deploys.
+
+🔗 **Live site · Sitio en vivo:** https://aliandy-web-itla.surge.sh
+
+**ES** — Este proyecto fue desarrollado para la materia **Electiva II: DevOps**. El objetivo principal es diseñar e implementar un pipeline automatizado de **Integración Continua y Despliegue Continuo (CI/CD)** para eliminar los despliegues manuales, asegurando que cualquier cambio en el código fuente se publique en producción de forma segura e instantánea al realizar un *push* a la rama principal.
 
 La aplicación estática se despliega automáticamente en **Surge.sh** mediante flujos de trabajo en la nube.
 
@@ -33,7 +39,7 @@ La aplicación estática se despliega automáticamente en **Surge.sh** mediante 
 
 El flujo automatizado se desencadena bajo las siguientes condiciones:
 
-1. **Trigger:** Un desarrollador realiza un `git push` a la rama principal (`main` o `master`).
+1. **Trigger:** Un desarrollador realiza un `git push` a la rama principal (`main`).
 2. **Ambiente Virtual:** GitHub Actions levanta un contenedor (ej. Ubuntu) de forma efímera.
 3. **Autenticación:** El pipeline extrae de manera segura el token de autenticación configurado en los *Repository Secrets* de GitHub.
 4. **Despliegue:** Se ejecuta el comando automatizado de Surge para transferir los archivos del proyecto al dominio público asignado en internet.
@@ -42,3 +48,14 @@ El flujo automatizado se desencadena bajo las siguientes condiciones:
 
 ## 🎓 Contexto Académico
 Este laboratorio práctico sirvió para asimilar las bases fundamentales de la cultura DevOps, orientándose al uso de herramientas modernas de automatización y entrega de software de calidad de manera ágil y eficiente.
+
+## 🔐 Required secrets · Secretos necesarios
+
+| Secret | Description |
+|---|---|
+| `SURGE_LOGIN` | Email of the Surge account · Correo de la cuenta de Surge |
+| `SURGE_TOKEN` | Token from `surge token` · Token generado con `surge token` |
+
+## 👩‍💻 Author · Autora
+
+**Aliandy Jimenez** — [@AliaJimenez](https://github.com/AliaJimenez)
